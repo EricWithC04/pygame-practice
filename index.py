@@ -14,7 +14,8 @@ colors = {
     "green": (0, 255, 0),
 }
 
-SCREEN.fill(colors["white"])
+bg = pygame.image.load("static/assets/background.jpg")
+SCREEN.blit(bg, (0, 0))
 pygame.draw.rect(SCREEN, colors["red"], (50, 40, 80, 48))
 pygame.draw.line(SCREEN, colors["green"], (50, 88), (200, 88), 10)
 pygame.draw.circle(SCREEN, colors["black"], (300, 88), 20, 15)
