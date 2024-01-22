@@ -19,6 +19,11 @@ pygame.draw.rect(SCREEN, colors["red"], (50, 40, 80, 48))
 pygame.draw.line(SCREEN, colors["green"], (50, 88), (200, 88), 10)
 pygame.draw.circle(SCREEN, colors["black"], (300, 88), 20, 15)
 
+pygame.draw.ellipse(SCREEN, (80, 200, 80), (55, 80, 75, 88), 5)
+
+points = [(100, 100), (200, 100), (150, 50)]
+pygame.draw.polygon(SCREEN, colors["blue"], points, 5)
+
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
