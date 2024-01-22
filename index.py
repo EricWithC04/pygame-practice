@@ -24,6 +24,9 @@ pygame.draw.ellipse(SCREEN, (80, 200, 80), (55, 80, 75, 88), 5)
 points = [(100, 100), (200, 100), (150, 50)]
 pygame.draw.polygon(SCREEN, colors["blue"], points, 5)
 
+icon = pygame.image.load("static/assets/icon.png")
+pygame.display.set_icon(icon)
+
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
