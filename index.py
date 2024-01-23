@@ -28,6 +28,21 @@ colors = {
 }
 
 bg = pygame.image.load("static/assets/background.jpg").convert()
+
+volume = 1.0
+pygame.mixer.music.load("static/audio/bg-sound.mp3")
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(volume)
+
+v_icons = [
+    pygame.image.load("static/assets/icons/volumen-1.png"),
+    pygame.image.load("static/assets/icons/volumen-2.png"),
+    pygame.image.load("static/assets/icons/volumen-3.png"),
+    pygame.image.load("static/assets/icons/mute.png")
+]
+
+v_icons = [pygame.transform.scale(img, (img.get_width() // 5, img.get_height() // 5)) for img in v_icons]
+
 bg_position = {
     "x": 0,
     "y": 0
@@ -110,7 +125,29 @@ while excecuted:
         right = False
         left = False
     
+    def vol_icon():
+        global volume
+        if volume <= 0:
+            SCREEN.blit(v_icons[3], (650, 30))
+        elif volume > 0.7:
+            SCREEN.blit(v_icons[0], (650, 30))
+        elif volume > 0.4:
+            SCREEN.blit(v_icons[1], (650, 30))
+        elif volume > 0:
+            SCREEN.blit(v_icons[2], (650, 30))
+
     update_screen()
+
+    if keys[pygame.K_8] and volume > 0:
+        volume -= 0.01
+        pygame.mixer.music.set_volume(volume)
+        vol_icon()
+    elif keys[pygame.K_9] and volume < 1.0:
+        volume += 0.01
+        pygame.mixer.music.set_volume(volume)
+        vol_icon()
+    elif keys[pygame.K_8] or keys[pygame.K_9]:
+        vol_icon()
     
     pygame.display.update()
     clock.tick(FPS)
