@@ -1,5 +1,6 @@
 import pygame, sys
 from pygame.locals import *
+from animations import *
 
 pygame.init()
 
@@ -8,7 +9,7 @@ screen_d = {
     "h": 480
 }
 
-FPS = 30
+FPS = 18
 clock = pygame.time.Clock()
 
 SCREEN = pygame.display.set_mode((
@@ -44,17 +45,72 @@ pygame.draw.polygon(SCREEN, colors["blue"], points, 5)
 icon = pygame.image.load("static/assets/icon.png")
 pygame.display.set_icon(icon)
 
-while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+excecuted = True
+
+px = 50
+py = 155
+left = False
+right = False
+
+steps = 0
+
+def update_screen():
+    global steps, right, left, bg_position, px
+
     x_relative = bg_position["x"] % SCREEN.get_rect().width
     SCREEN.blit(bg, (x_relative - SCREEN.get_rect().width, bg_position["y"]))
 
     if x_relative < screen_d["w"]:
         SCREEN.blit(bg, (x_relative, bg_position["y"]))
 
-    bg_position["x"] = bg_position["x"] - 5
+    if right and px >= 600:
+        bg_position["x"] = bg_position["x"] - 5
+    elif left and px <= 50:
+        bg_position["x"] = bg_position["x"] + 5
+    else:
+        bg_position["x"] = bg_position["x"]
+    
+    if steps + 1 >= 15:
+        steps = 0
+
+    if right:
+        if steps + 1 >= 11:
+            steps = 0
+        SCREEN.blit(characterWalkR[steps], (px, py))
+        steps += 1
+    elif left:
+        if steps + 1 >= 11:
+            steps = 0
+        SCREEN.blit(characterWalkL[steps], (px, py))
+        steps += 1
+    else:
+        SCREEN.blit(characterIdle[steps], (px, py))
+        steps += 1
+
+
+while excecuted:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+    
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_d]:
+        right = True
+        left = False
+        if px < 600:
+            px += 5
+    elif keys[pygame.K_a]:
+        right = False
+        left = True
+        if px > 50:
+            px -= 5
+    else:
+        right = False
+        left = False
+    
+    update_screen()
+    
     pygame.display.update()
     clock.tick(FPS)
