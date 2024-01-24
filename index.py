@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, random
 from pygame.locals import *
 from animations import *
 from models.character import Player
@@ -61,6 +61,7 @@ px = 50
 py = 155
 left = False
 right = False
+num_enemies = 5
 
 steps = 0
 
@@ -91,15 +92,18 @@ all_sprites = pygame.sprite.Group()
 new_player = Player(px, py)
 all_sprites.add(new_player)
 
-new_enemy = Enemy(screen_d["w"])
-all_sprites.add(new_enemy)
-
 while excecuted:
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
     
+    enemyAppearance = random.randrange(100)
+    if enemyAppearance > 95 and num_enemies > 0:
+        new_enemy = Enemy(screen_d["w"])
+        all_sprites.add(new_enemy)
+        num_enemies -= 1
+
     all_sprites.update()
     keys = pygame.key.get_pressed()
 
