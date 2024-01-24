@@ -49,14 +49,14 @@ bg_position = {
     "y": 0
 }
 
-pygame.draw.rect(SCREEN, colors["red"], (50, 40, 80, 48))
+""" pygame.draw.rect(SCREEN, colors["red"], (50, 40, 80, 48))
 pygame.draw.line(SCREEN, colors["green"], (50, 88), (200, 88), 10)
 pygame.draw.circle(SCREEN, colors["black"], (300, 88), 20, 15)
 
 pygame.draw.ellipse(SCREEN, (80, 200, 80), (55, 80, 75, 88), 5)
 
 points = [(100, 100), (200, 100), (150, 50)]
-pygame.draw.polygon(SCREEN, colors["blue"], points, 5)
+pygame.draw.polygon(SCREEN, colors["blue"], points, 5) """
 
 icon = pygame.image.load("static/assets/icon.png")
 pygame.display.set_icon(icon)
@@ -71,7 +71,7 @@ right = False
 steps = 0
 
 def update_screen():
-    global steps, right, left, bg_position, px
+    global steps, right, left, bg_position, px, py, all_sprites
 
     x_relative = bg_position["x"] % SCREEN.get_rect().width
     SCREEN.blit(bg, (x_relative - SCREEN.get_rect().width, bg_position["y"]))
@@ -88,7 +88,10 @@ def update_screen():
     
     if steps + 1 >= 15:
         steps = 0
-
+    
+    all_sprites.draw(SCREEN)
+    pygame.display.flip()
+""" 
     if right:
         if steps + 1 >= 11:
             steps = 0
@@ -102,6 +105,7 @@ def update_screen():
     else:
         SCREEN.blit(characterIdle[steps], (px, py))
         steps += 1
+"""
 
 all_sprites = pygame.sprite.Group()
 new_player = Player()
@@ -115,9 +119,6 @@ while excecuted:
     
     all_sprites.update()
     keys = pygame.key.get_pressed()
-
-    all_sprites.draw(SCREEN)
-    pygame.display.flip()
 
     if keys[pygame.K_d]:
         right = True
