@@ -2,6 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from animations import *
 from models.character import Player
+from models.enemy import Enemy
 # from models.background import Background
 
 pygame.init()
@@ -86,8 +87,12 @@ def update_screen():
     pygame.display.flip()
 
 all_sprites = pygame.sprite.Group()
+
 new_player = Player(px, py)
 all_sprites.add(new_player)
+
+new_enemy = Enemy()
+all_sprites.add(new_enemy)
 
 while excecuted:
     for event in pygame.event.get():

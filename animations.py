@@ -49,3 +49,53 @@ characterWalkL = [
 ]
 
 characterWalkL = [pygame.transform.scale(img, (img.get_width() // 3, img.get_height() // 3)) for img in characterWalkL]
+
+enemyIdle = [
+    pygame.image.load("static/assets/enemies/I1.png"),
+    pygame.image.load("static/assets/enemies/I2.png"),
+    pygame.image.load("static/assets/enemies/I3.png"),
+    pygame.image.load("static/assets/enemies/I4.png"),
+    pygame.image.load("static/assets/enemies/I5.png"),
+    pygame.image.load("static/assets/enemies/I6.png"),
+    pygame.image.load("static/assets/enemies/I7.png"),
+    pygame.image.load("static/assets/enemies/I8.png"),
+    pygame.image.load("static/assets/enemies/I9.png"),
+    pygame.image.load("static/assets/enemies/I10.png"),
+    pygame.image.load("static/assets/enemies/I11.png"),
+    pygame.image.load("static/assets/enemies/I12.png"),
+    pygame.image.load("static/assets/enemies/I13.png"),
+    pygame.image.load("static/assets/enemies/I14.png"),
+    pygame.image.load("static/assets/enemies/I15.png"),
+]
+
+enemyIdle = [pygame.transform.scale(img, (img.get_width() // 3, img.get_height() // 3)) for img in enemyIdle]
+
+enemyWalkR = [
+    pygame.image.load("static/assets/enemies/R1.png"),
+    pygame.image.load("static/assets/enemies/R2.png"),
+    pygame.image.load("static/assets/enemies/R3.png"),
+    pygame.image.load("static/assets/enemies/R4.png"),
+    pygame.image.load("static/assets/enemies/R5.png"),
+    pygame.image.load("static/assets/enemies/R6.png"),
+    pygame.image.load("static/assets/enemies/R7.png"),
+    pygame.image.load("static/assets/enemies/R8.png"),
+    pygame.image.load("static/assets/enemies/R9.png"),
+    pygame.image.load("static/assets/enemies/R10.png"),
+]
+
+enemyWalkR = [pygame.transform.scale(img, (img.get_width() // 3, img.get_height() // 3)) for img in enemyWalkR]
+
+enemyWalkL = [
+    pygame.image.load("static/assets/enemies/L1.png"),
+    pygame.image.load("static/assets/enemies/L2.png"),
+    pygame.image.load("static/assets/enemies/L3.png"),
+    pygame.image.load("static/assets/enemies/L4.png"),
+    pygame.image.load("static/assets/enemies/L5.png"),
+    pygame.image.load("static/assets/enemies/L6.png"),
+    pygame.image.load("static/assets/enemies/L7.png"),
+    pygame.image.load("static/assets/enemies/L8.png"),
+    pygame.image.load("static/assets/enemies/L9.png"),
+    pygame.image.load("static/assets/enemies/L10.png"),
+]
+
+enemyWalkL = [pygame.transform.scale(img, (img.get_width() // 3, img.get_height() // 3)) for img in enemyWalkL]
