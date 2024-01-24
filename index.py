@@ -1,6 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from animations import *
+from models.character import Player
 
 pygame.init()
 
@@ -102,6 +103,9 @@ def update_screen():
         SCREEN.blit(characterIdle[steps], (px, py))
         steps += 1
 
+all_sprites = pygame.sprite.Group()
+new_player = Player()
+all_sprites.add(new_player)
 
 while excecuted:
     for event in pygame.event.get():
@@ -109,7 +113,11 @@ while excecuted:
             pygame.quit()
             sys.exit()
     
+    all_sprites.update()
     keys = pygame.key.get_pressed()
+
+    all_sprites.draw(SCREEN)
+    pygame.display.flip()
 
     if keys[pygame.K_d]:
         right = True
