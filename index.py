@@ -51,15 +51,6 @@ bg_position = {
     "y": 0
 }
 
-""" pygame.draw.rect(SCREEN, colors["red"], (50, 40, 80, 48))
-pygame.draw.line(SCREEN, colors["green"], (50, 88), (200, 88), 10)
-pygame.draw.circle(SCREEN, colors["black"], (300, 88), 20, 15)
-
-pygame.draw.ellipse(SCREEN, (80, 200, 80), (55, 80, 75, 88), 5)
-
-points = [(100, 100), (200, 100), (150, 50)]
-pygame.draw.polygon(SCREEN, colors["blue"], points, 5) """
-
 icon = pygame.image.load("static/assets/icon.png")
 pygame.display.set_icon(icon)
 
@@ -73,7 +64,7 @@ right = False
 steps = 0
 
 def update_screen():
-    global steps, right, left, bg_position, px, py, all_sprites
+    global steps, right, left, bg_position, all_sprites
 
     x_relative = bg_position["x"] % SCREEN.get_rect().width
     SCREEN.blit(bg, (x_relative - SCREEN.get_rect().width, bg_position["y"]))
@@ -81,9 +72,9 @@ def update_screen():
     if x_relative < screen_d["w"]:
         SCREEN.blit(bg, (x_relative, bg_position["y"]))
 
-    if right and px >= 600:
+    if right and new_player.rect.x >= 600:
         bg_position["x"] = bg_position["x"] - 5
-    elif left and px <= 50:
+    elif left and new_player.rect.x <= 50:
         bg_position["x"] = bg_position["x"] + 5
     else:
         bg_position["x"] = bg_position["x"]
@@ -93,21 +84,6 @@ def update_screen():
     
     all_sprites.draw(SCREEN)
     pygame.display.flip()
-""" 
-    if right:
-        if steps + 1 >= 11:
-            steps = 0
-        SCREEN.blit(characterWalkR[steps], (px, py))
-        steps += 1
-    elif left:
-        if steps + 1 >= 11:
-            steps = 0
-        SCREEN.blit(characterWalkL[steps], (px, py))
-        steps += 1
-    else:
-        SCREEN.blit(characterIdle[steps], (px, py))
-        steps += 1
-"""
 
 all_sprites = pygame.sprite.Group()
 new_player = Player(px, py)
@@ -125,13 +101,9 @@ while excecuted:
     if keys[pygame.K_d]:
         right = True
         left = False
-        if px < 600:
-            px += 5
     elif keys[pygame.K_a]:
         right = False
         left = True
-        if px > 50:
-            px -= 5
     else:
         right = False
         left = False
@@ -150,11 +122,11 @@ while excecuted:
     update_screen()
 
     if keys[pygame.K_8] and volume > 0:
-        volume -= 0.01
+        volume -= 0.02
         pygame.mixer.music.set_volume(volume)
         vol_icon()
     elif keys[pygame.K_9] and volume < 1.0:
-        volume += 0.01
+        volume += 0.02
         pygame.mixer.music.set_volume(volume)
         vol_icon()
     elif keys[pygame.K_8] or keys[pygame.K_9]:
