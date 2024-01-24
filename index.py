@@ -2,6 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from animations import *
 from models.character import Player
+from models.background import Background
 
 pygame.init()
 
@@ -28,6 +29,7 @@ colors = {
     "green": (0, 255, 0),
 }
 
+background = Background("static/assets/background.jpg", (0, 0))
 bg = pygame.image.load("static/assets/background.jpg").convert()
 
 volume = 1.0
