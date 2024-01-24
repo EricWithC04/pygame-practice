@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from animations import *
 from models.character import Player
-from models.background import Background
+# from models.background import Background
 
 pygame.init()
 
@@ -29,10 +29,10 @@ colors = {
     "green": (0, 255, 0),
 }
 
-background = Background("static/assets/background.jpg", (0, 0))
+# background = Background("static/assets/background.jpg", (0, 0))
 bg = pygame.image.load("static/assets/background.jpg").convert()
 
-volume = 1.0
+volume = 0.5
 pygame.mixer.music.load("static/audio/bg-sound.mp3")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(volume)
@@ -110,7 +110,7 @@ def update_screen():
 """
 
 all_sprites = pygame.sprite.Group()
-new_player = Player()
+new_player = Player(px, py)
 all_sprites.add(new_player)
 
 while excecuted:
