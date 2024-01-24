@@ -1,8 +1,8 @@
-import pygame
+import pygame, random
 from animations import *
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, width):
         super().__init__()
 
         self.animation_frames = enemyIdle
@@ -12,7 +12,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (200, 240)
 
-        self.rect.x = 800 - (self.image.get_width() + 50)
+        self.rect.x = random.randrange(width - self.image.get_width())
         self.rect.y = 135
 
         

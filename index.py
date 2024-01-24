@@ -91,7 +91,7 @@ all_sprites = pygame.sprite.Group()
 new_player = Player(px, py)
 all_sprites.add(new_player)
 
-new_enemy = Enemy()
+new_enemy = Enemy(screen_d["w"])
 all_sprites.add(new_enemy)
 
 while excecuted:
