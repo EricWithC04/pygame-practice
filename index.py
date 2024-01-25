@@ -100,6 +100,9 @@ while excecuted:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and not new_player.jump:
+                new_player.jump = True
     
     actual_time = pygame.time.get_ticks()
     if actual_time - last_enemy > enemy_await:

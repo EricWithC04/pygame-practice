@@ -50,6 +50,12 @@ characterWalkL = [
 
 characterWalkL = [pygame.transform.scale(img, (img.get_width() // 3, img.get_height() // 3)) for img in characterWalkL]
 
+characterJump = [
+    pygame.image.load("static/assets/character/J.png"),
+]
+
+characterJump = [pygame.transform.scale(img, (img.get_width() // 3, img.get_height() // 3)) for img in characterJump]
+
 enemyIdle = [
     pygame.image.load("static/assets/enemies/I1.png"),
     pygame.image.load("static/assets/enemies/I2.png"),

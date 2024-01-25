@@ -10,6 +10,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.animation_frames[self.current_frame]
         self.walkR = characterWalkR
         self.walkL = characterWalkL
+        self.jumpFrame = characterJump
 
         self.rect = self.image.get_rect()
         self.rect.center = (200, 240)
@@ -17,8 +18,21 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = px
         self.rect.y = py
 
+        self.jump = False
+        self.jumpForce = 150
+
     def update(self):
         keys = pygame.key.get_pressed()
+        if self.rect.y <= 5:
+            self.jump = False
+        if self.rect.y < 155 and self.jump == False:
+            self.rect.y += 5
+            self.jumpForce += 5
+        if self.jump:
+            self.image = self.jumpFrame[0]
+            self.rect.y -= 5
+            self.jumpForce -=5
+        
         if keys[pygame.K_d]:
             if self.rect.x <= 600:
                 self.rect.x += 5
