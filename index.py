@@ -122,7 +122,7 @@ while excecuted:
     actual_time = pygame.time.get_ticks()
     if actual_time - last_enemy > enemy_await:
         enemyAppearance = random.randrange(100)
-        if enemyAppearance > 95 and num_enemies > 0:
+        if enemyAppearance > 85 and num_enemies > 0:
             new_enemy = Enemy(screen_d["w"])
             all_enemies.add(new_enemy)
             num_enemies -= 1
@@ -132,8 +132,9 @@ while excecuted:
     all_enemies.update()
 
     collision = pygame.sprite.spritecollide(new_player, all_enemies, False)
-    if collision:
+    if collision and new_player.life > 0:
         new_player.life = 0
+        new_player.current_frame = 0
 
     keys = pygame.key.get_pressed()
 

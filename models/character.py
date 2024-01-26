@@ -21,6 +21,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = px
         self.rect.y = py
 
+        self.rect.width = self.rect.width // 2
+        self.rect.height = self.rect.height // 2
+
         self.jump = False
         self.jumpSpeed = 20
         self.jumpAcceleration = 1

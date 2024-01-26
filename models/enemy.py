@@ -14,6 +14,9 @@ class Enemy(pygame.sprite.Sprite):
 
         self.rect.x = width
         self.rect.y = 135
+
+        self.rect.width = self.rect.width // 2
+        self.rect.height = self.rect.height // 2
     
     def update(self):
         self.current_frame = (self.current_frame + 1) % len(self.animation_frames)
