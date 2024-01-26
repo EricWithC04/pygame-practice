@@ -11,6 +11,9 @@ class Player(pygame.sprite.Sprite):
         self.walkR = characterWalkR
         self.walkL = characterWalkL
         self.jumpFrame = characterJump
+        self.deadFrame = characterDead
+
+        self.life = 1
 
         self.rect = self.image.get_rect()
         self.rect.center = (200, 240)
@@ -40,7 +43,12 @@ class Player(pygame.sprite.Sprite):
             self.rect.y -= self.jumpSpeed
             self.spaceBetweenFloor += self.jumpSpeed
         
-        if keys[pygame.K_d]:
+        if self.life == 0:
+            self.rect.y = 170
+            if self.current_frame + 1 < len(self.deadFrame):
+                self.current_frame = (self.current_frame + 1) % len(self.deadFrame)
+            self.image = self.deadFrame[self.current_frame]
+        elif keys[pygame.K_d]:
             if self.rect.x <= 600:
                 self.rect.x += 5
             self.current_frame = (self.current_frame + 1) % len(self.walkR)

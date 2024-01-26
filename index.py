@@ -74,23 +74,38 @@ def update_screen():
     if x_relative < screen_d["w"]:
         SCREEN.blit(bg, (x_relative, bg_position["y"]))
 
-    if right and new_player.rect.x >= 600:
-        bg_position["x"] = bg_position["x"] - 5
-    elif left and new_player.rect.x <= 50:
-        bg_position["x"] = bg_position["x"] + 5
-    else:
-        bg_position["x"] = bg_position["x"]
+    if new_player.life > 0:
+        if right and new_player.rect.x >= 600:
+            bg_position["x"] = bg_position["x"] - 5
+        elif left and new_player.rect.x <= 50:
+            bg_position["x"] = bg_position["x"] + 5
+        else:
+            bg_position["x"] = bg_position["x"]
     
     if steps + 1 >= 15:
         steps = 0
-    
+
     all_sprites.draw(SCREEN)
+    all_enemies.draw(SCREEN)
+
+    if new_player.life == 0:
+        SCREEN.blit(text, text_rect)
+
     pygame.display.flip()
 
 all_sprites = pygame.sprite.Group()
+all_enemies = pygame.sprite.Group()
 
 new_player = Player(px, py)
 all_sprites.add(new_player)
+
+font = pygame.font.Font(None, 72)
+text = font.render("GAME OVER", True, (255, 255, 255))
+text_rect = text.get_rect()
+text_rect.center = (
+    screen_d["w"] // 2, 
+    screen_d["h"] // 2
+)
 
 enemy_await = 2000
 last_enemy = pygame.time.get_ticks()
@@ -101,7 +116,7 @@ while excecuted:
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE and not new_player.jump:
+            if event.key == pygame.K_SPACE and new_player.rect.y == 155:
                 new_player.jump = True
     
     actual_time = pygame.time.get_ticks()
@@ -109,11 +124,17 @@ while excecuted:
         enemyAppearance = random.randrange(100)
         if enemyAppearance > 95 and num_enemies > 0:
             new_enemy = Enemy(screen_d["w"])
-            all_sprites.add(new_enemy)
+            all_enemies.add(new_enemy)
             num_enemies -= 1
             last_enemy = actual_time
 
     all_sprites.update()
+    all_enemies.update()
+
+    collision = pygame.sprite.spritecollide(new_player, all_enemies, False)
+    if collision:
+        new_player.life = 0
+
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_d]:

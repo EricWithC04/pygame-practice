@@ -56,6 +56,23 @@ characterJump = [
 
 characterJump = [pygame.transform.scale(img, (img.get_width() // 3, img.get_height() // 3)) for img in characterJump]
 
+characterDead = [
+    pygame.image.load("static/assets/character/Dead1.png"),
+    pygame.image.load("static/assets/character/Dead2.png"),
+    pygame.image.load("static/assets/character/Dead3.png"),
+    pygame.image.load("static/assets/character/Dead4.png"),
+    pygame.image.load("static/assets/character/Dead5.png"),
+    pygame.image.load("static/assets/character/Dead6.png"),
+    pygame.image.load("static/assets/character/Dead7.png"),
+    pygame.image.load("static/assets/character/Dead8.png"),
+    pygame.image.load("static/assets/character/Dead9.png"),
+    pygame.image.load("static/assets/character/Dead10.png"),
+    pygame.image.load("static/assets/character/Dead11.png"),
+    pygame.image.load("static/assets/character/Dead12.png"),
+]
+
+characterDead = [pygame.transform.scale(img, (img.get_width() // 3, img.get_height() // 3)) for img in characterDead]
+
 enemyIdle = [
     pygame.image.load("static/assets/enemies/I1.png"),
     pygame.image.load("static/assets/enemies/I2.png"),

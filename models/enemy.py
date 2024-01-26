@@ -18,4 +18,6 @@ class Enemy(pygame.sprite.Sprite):
     def update(self):
         self.current_frame = (self.current_frame + 1) % len(self.animation_frames)
         self.image = self.animation_frames[self.current_frame]
-        self.rect.x -= 5
+        self.rect.x -= 10
+        if self.rect.x + self.rect.width / 2 <= 0:
+            self.kill()
