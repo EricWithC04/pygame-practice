@@ -61,7 +61,7 @@ px = 50
 py = 155
 left = False
 right = False
-num_enemies = 1
+num_enemies = 3
 
 steps = 0
 
@@ -70,6 +70,11 @@ def update_screen():
 
     x_relative = bg_position["x"] % SCREEN.get_rect().width
     SCREEN.blit(bg, (x_relative - SCREEN.get_rect().width, bg_position["y"]))
+
+    points_font = pygame.font.Font(None, 48)
+    points = points_font.render(f"Points: {new_player.points}", True, (255, 255, 255))
+    points_rect = points.get_rect()
+    points_rect.center = (points_rect.width // 1.5, 35)
 
     if x_relative < screen_d["w"]:
         SCREEN.blit(bg, (x_relative, bg_position["y"]))
@@ -91,6 +96,8 @@ def update_screen():
     if new_player.life == 0:
         SCREEN.blit(text, text_rect)
 
+    SCREEN.blit(points, points_rect)
+
     pygame.display.flip()
 
 all_sprites = pygame.sprite.Group()
@@ -107,7 +114,7 @@ text_rect.center = (
     screen_d["h"] // 2
 )
 
-enemy_await = 2000
+enemy_await = 3000
 last_enemy = pygame.time.get_ticks()
 
 while excecuted:
@@ -125,7 +132,7 @@ while excecuted:
         if enemyAppearance > 85 and num_enemies > 0:
             new_enemy = Enemy(screen_d["w"])
             all_enemies.add(new_enemy)
-            num_enemies -= 2
+            num_enemies -= 1
             last_enemy = actual_time
 
     all_sprites.update()
@@ -136,6 +143,7 @@ while excecuted:
         for enemy in collision:
             if new_player.rect.bottom >= enemy.rect.top and new_player.rect.x > enemy.rect.x:
                 all_enemies.remove(enemy)
+                new_player.points += 1
                 new_player.jump = True
                 new_player.jumpSpeed -= 1
             elif new_player.life > 0:

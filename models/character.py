@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.deadFrame = characterDead
 
         self.life = 1
+        self.points = 0
 
         self.rect = self.image.get_rect()
         self.rect.center = (200, 240)
