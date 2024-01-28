@@ -61,7 +61,7 @@ px = 50
 py = 155
 left = False
 right = False
-num_enemies = 5
+num_enemies = 1
 
 steps = 0
 
@@ -125,16 +125,22 @@ while excecuted:
         if enemyAppearance > 85 and num_enemies > 0:
             new_enemy = Enemy(screen_d["w"])
             all_enemies.add(new_enemy)
-            num_enemies -= 1
+            num_enemies -= 2
             last_enemy = actual_time
 
     all_sprites.update()
     all_enemies.update()
 
     collision = pygame.sprite.spritecollide(new_player, all_enemies, False)
-    if collision and new_player.life > 0:
-        new_player.life = 0
-        new_player.current_frame = 0
+    if collision:
+        for enemy in collision:
+            if new_player.rect.bottom >= enemy.rect.top and new_player.rect.x > enemy.rect.x:
+                all_enemies.remove(enemy)
+                new_player.jump = True
+                new_player.jumpSpeed -= 1
+            elif new_player.life > 0:
+                new_player.life = 0
+                new_player.current_frame = 0
 
     keys = pygame.key.get_pressed()
 

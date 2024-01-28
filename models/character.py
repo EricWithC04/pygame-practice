@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = py
 
         self.rect.width = self.rect.width // 2
-        self.rect.height = self.rect.height // 2
+        self.rect.height = self.rect.height // 1.5
 
         self.jump = False
         self.jumpSpeed = 20
@@ -41,6 +41,9 @@ class Player(pygame.sprite.Sprite):
         if self.spaceBetweenFloor > 0 and self.jump == False:
             self.rect.y += self.jumpSpeed
             self.spaceBetweenFloor -= self.jumpSpeed
+        if self.spaceBetweenFloor < 0:
+            self.spaceBetweenFloor = 0
+            self.rect.y = 155
         if self.jump:
             self.image = self.jumpFrame[0]
             self.rect.y -= self.jumpSpeed
