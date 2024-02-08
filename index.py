@@ -38,6 +38,12 @@ pygame.mixer.music.load("static/audio/bg-sound.mp3")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(volume)
 
+sfx = [
+    pygame.mixer.Sound("static/audio/jump.wav"),
+    pygame.mixer.Sound("static/audio/point.wav"),
+    pygame.mixer.Sound("static/audio/death.wav"),
+]
+
 v_icons = [
     pygame.image.load("static/assets/icons/volumen-1.png"),
     pygame.image.load("static/assets/icons/volumen-2.png"),
@@ -61,7 +67,7 @@ px = 50
 py = 155
 left = False
 right = False
-num_enemies = 3
+num_enemies = 999
 
 steps = 0
 
@@ -125,6 +131,7 @@ while excecuted:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and new_player.rect.y == 155:
                 new_player.jump = True
+                sfx[0].play()
     
     actual_time = pygame.time.get_ticks()
     if actual_time - last_enemy > enemy_await:
@@ -144,11 +151,13 @@ while excecuted:
             if new_player.rect.bottom >= enemy.rect.top and new_player.rect.x > enemy.rect.x:
                 all_enemies.remove(enemy)
                 new_player.points += 1
+                sfx[1].play()
                 new_player.jump = True
                 new_player.jumpSpeed -= 1
             elif new_player.life > 0:
                 new_player.life = 0
                 new_player.current_frame = 0
+                sfx[2].play()
 
     keys = pygame.key.get_pressed()
 
