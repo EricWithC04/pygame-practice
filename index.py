@@ -148,7 +148,7 @@ while excecuted:
     collision = pygame.sprite.spritecollide(new_player, all_enemies, False)
     if collision:
         for enemy in collision:
-            if new_player.rect.bottom >= enemy.rect.top and new_player.rect.x > enemy.rect.x:
+            if new_player.rect.bottom >= enemy.rect.top and new_player.rect.x > enemy.rect.x and new_player.life > 0:
                 all_enemies.remove(enemy)
                 new_player.points += 1
                 sfx[1].play()
