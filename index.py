@@ -34,7 +34,7 @@ colors = {
 bg = pygame.image.load("static/assets/background.jpg").convert()
 
 volume = 0.5
-pygame.mixer.music.load("static/audio/bg-sound.mp3")
+pygame.mixer.music.load("static/audio/bg-sound.wav")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(volume)
 
